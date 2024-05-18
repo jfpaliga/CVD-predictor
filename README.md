@@ -1,67 +1,131 @@
-# ![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# CVD Predictor - A Predictive Classification Model for Determining Risk of Heart Disease
 
-## Template Instructions
+Live link here - PLACEHOLDER
 
-Welcome,
+CVD Predictor is a machine-learning (ML) project using a publically available dataset to determine whether a ML pipeline could be built in order to predict whether a patient is at risk of heart disease. This was achieved by using a classification task, using the HeartDisease attribute from the dataset as the target and the remaining attributes as features.
 
-This is the Code Institute student template for the bring your own data project option in Predictive Analytics. We have preinstalled all of the tools you need to get started. It's perfectly okay to use this template as the basis for your project submissions. Click the `Use this template` button above to get started.
+## Table of Contents
 
-You can safely delete the Template Instructions section of this README.md file and modify the remaining paragraphs for your own project. Please do read the Template Instructions at least once, though! It contains some important information about the IDE and the extensions we use.
-
-## How to use this repo
-
-1. Use this template to create your GitHub project repo
-
-1. Log into your cloud IDE with your GitHub account.
-
-1. On your Dashboard, click on the New Workspace button
-
-1. Paste in the URL you copied from GitHub earlier
-
-1. Click Create
-
-1. Wait for the workspace to open. This can take a few minutes.
-
-1. Open a new terminal and `pip3 install -r requirements.txt`
-
-1. Open the jupyter_notebooks directory, and click on the notebook you want to open.
-
-1. Click the kernel button and choose Python Environments.
-
-Note that the kernel says Python 3.8.18 as it inherits from the workspace, so it will be Python-3.8.18 as installed by our template. To confirm this, you can use `! python --version` in a notebook code cell.
-
-## Cloud IDE Reminders
-
-To log into the Heroku toolbelt CLI:
-
-1. Log in to your Heroku account and go to _Account Settings_ in the menu under your avatar.
-2. Scroll down to the _API Key_ and click _Reveal_
-3. Copy the key
-4. In the terminal, run `heroku_config`
-5. Paste in your API key when asked
-
-
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidentally make it public then you can create a new one with _Regenerate API Key_.
+- [Dataset Content](#dataset-content)
+- [Business Requirements](#business-requirements)
+- [Hypothesis](#hypothesis-and-how-to-validate)
+- [Mapping Business Requirements to Data Visualisation and ML Tasks](#the-rationale-to-map-the-business-requirements-to-the-data-visualizations-and-ml-tasks)
+- [ML Business Case](#ml-business-case)
+- [Epics and User Stories](#epics-and-user-stories)
+- [Dashboard Design](#dashboard-design)
+- [Technologies Used](#technologies-used)
+- [Testing](#testing)
+- [Unfixed Bugs](#unfixed-bugs)
+- [Deployment](#deployment)
+- [Credits](#credits)
+- [Acknowledgements](#acknowledgements)
 
 
 ## Dataset Content
-* Describe your dataset. Choose a dataset of reasonable size to avoid exceeding the repository's maximum size and to have a shorter model training time. If you are doing an image recognition project, we suggest you consider using an image shape that is 100px × 100px or 50px × 50px, to ensure the model meets the performance requirement but is smaller than 100Mb for a smoother push to GitHub. A reasonably sized image set is ~5000 images, but you can choose ~10000 lines for numeric or textual data. 
+
+* The dataset is sourced from [Kaggle](https://www.kaggle.com/datasets/fedesoriano/heart-failure-prediction/data). Each row represents a patient and each column contains a patient attribute. The dataset includes information about:
+    - patient age and sex
+    - patient medical information such as blood pressure, heart rate and cholesterol levels
+    - whether or not the patient had heart disease
+
+| Attribute      | Information                               | Units                                                                                       |
+|----------------|-------------------------------------------|---------------------------------------------------------------------------------------------|
+| Age            | age of the patient                        | years                                                                                       |
+| Sex            | sex of the patient                        | M: Male, F: Female                                                                          |
+| ChestPainType  | chest pain type                           | TA: Typical Angina, ATA: Atypical Angina, NAP: Non-Anginal Pain, ASY: Asymptomatic          |
+| RestingBP      | resting blood pressure                    | mm Hg                                                                                       |
+| Cholesterol    | serum cholesterol                         | mm/dl                                                                                       |
+| FastingBS      | fasting blood sugar                       | 1: if FastingBS > 120 mg/dl, 0: otherwise                                                   |
+| RestingECG     | resting electrocardiogram results         | Normal: Normal, ST: having ST-T wave abnormality (T wave inversions and/or ST elevation or depression of > 0.05 mV), LVH: showing probable or definite left ventricular hypertrophy by Estes' criteria |
+| MaxHR          | maximum heart rate achieved               | Numeric value between 60 and 202                                                            |
+| ExerciseAngina | exercise-induced angina                   | Y: Yes, N: No                                                                               |
+| Oldpeak        | oldpeak = ST                              | Numeric value measured in depression                                                        |
+| ST_Slope       | the slope of the peak exercise ST segment | Up: upsloping, Flat: flat, Down: downsloping                                                |
+| HeartDisease   | output class                              | 1: heart disease, 0: Normal                                                                 |
 
 
 ## Business Requirements
-* Describe your business requirements
+* Cardiovascular diseases are the number 1 cause of death globally, accounting for 31% of all deaths worldwide. People with cardiovascular disease or who are at high risk of disease need early detection and management. A fictional organisation has requested a data practitioner to analyse a dataset of patients from a number of different hospitals in order to determine what factors can be attributed to a high risk of disease and whether patient data can accurately predict risk of heart disease.
+
+* Business Requirement 1 - The client is interested in which attributes correlate most closely with heart disease, ie what are the most common risk factors?
+* Business Requirement 2 - The client is interested in using patient data to predict whether or not a patient is at risk of heart disease.
 
 
 ## Hypothesis and how to validate?
-* List here your project hypothesis(es) and how you envision validating it (them) 
+* Hypothesis 1:
+    - We suspect that the highest risk factors involved in heart disease are cholesterol and maximum heart rate.
+    - **Validation**: a correlation analysis that indicates a strong relationship between the above features and the target 'HeartDisease'.
+
+* Hypothesis 2:
+    - We suspect that a successful prediction will rely on a large number of parameters.
+    - **Validation**: analysis of the feature importance from the ML pipeline after hyperparameter optimisation will indicate at least 5/11 of the features are necessary for a prediction.
+
+* Hypothesis 3:
+    - We suspect that men over 50 with high cholesterol are the most at-risk patient group.
+    - **Validation**: analysis and visualisation using a parallel plot of the dataset to determine a 'typical' heart disease patient profile
 
 
 ## The rationale to map the business requirements to the Data Visualizations and ML tasks
-* List your business requirements and a rationale to map them to the Data Visualizations and ML tasks
+* **Business Requirement 1**: Data Visualisation and Correlation study
+    - We need to perform a correlation study to determine which features correlate most closely to the target.
+    - A Pearson's correlation will indicate linear relationships between numerical variables.
+    - A Spearman's correlation will measure the monotonic relationships between variables.
+    - A Predictive Power Score study can also be used to determine relationships between attributes regardless of data type (6/11 features are categorical).
+
+* **Business Requirement 2**: Classification Model
+    - We need to predict whether a patient is at risk of heart disease or not.
+    - Therefore we need to build a binary classification model.
+    - A conventional machine learning pipeline will be able to map the relationships between the features and target.
+    - Extensive hyperparamter optimisation will give us the best chance at a highly accurate prediction.
 
 
 ## ML Business Case
-* In the previous bullet, you potentially visualized an ML task to answer a business requirement. You should frame the business case using the method we covered in the course 
+**Classification Model**
+* We want a ML model to predict whether a patient is at risk of heart disease based upon previously gathered patient data. The target variable, 'HeartDisease', is categorical and contains two classes: 0 (no heart disease) and 1 (heart disease).
+* We will consider a **classification model**, a supervised model with a two-class, single-label output that matches the target.
+* The model success metrics are:
+    - at least 90% recall for heart disease on the train and test sets
+* The model will be considered a failure if:
+    - the model fails to achieve 90% recall for heart disease
+    - the model fails to achieve 70% precision for no heart disease (falsely indicating patients are at risk)
+* The model output is defined as a flag, indicating if a patient will have heart disease or not and the associated probability of heart disease.
+* The training data to fit the model comes from: [Kaggle](https://www.kaggle.com/datasets/fedesoriano/heart-failure-prediction/data)
+    - The dataset contains: 918 observations and 12 attributes.
+    - Target: HeartDisease; Features: all other attributes.
+
+## Epics and User Stories
+* The project was split into 5 Epics based upon the Data Visualisation and Machine Learning tasks and within each of these, user stories were set out to enable an agile methodology.
+
+### Epic - Information Gathering and Data Collection
+* **User Story** - As a data analyst, I can import the dataset from Kaggle so that I can save the data in a local directory.
+* **User Story** - As a data analyst, I can load a saved dataset so that I can analyse the data to gain insights on what further tasks may be required.
+
+### Epic - Data Visualization, Cleaning, and Preparation
+* **User Story** - As a data scientist, I can visualise the dataset so that I can interpret which attributes correlate most closely with heart disease (Business Requirement 1).
+* **User Story** - As a data analyst, I can evaluate the dataset to determine what data cleaning tasks need to be carried out.
+* **User Story** - As a data analyst, I can impute or drop missing data to prepare the dataset for a ML model.
+* **User Story** - As a data analyst, I can determine whether the target requires balancing in order to ensure the ML is not fed imbalanced data.
+* **User Story** - As a data scientist, I can carry out feature engineering to best transform the data for the ML model.
+
+### Epic - Model Training, Optimization and Validation
+* **User Story** - As a data scientist, I can split the data into a train and test set to prepare it for the ML model.
+* **User Story** - As a data engineer, I can fit a ML pipeline with all the data to prepare the ML model for deployment.
+* **User Story** - As a data engineer, I can determine the best algorithm for predicting heart disease to use in the ML model.
+* **User Story** - As a data engineer, I can carry out an extensive hyperparameter optimisation to ensure the ML model gives the best results.
+* **User Story** - As a data scientist, I can determine the best features from the ML pipeline to determine whether the ML model can be optimised further.
+* **User Story** - As a data scientist, I can evaluate the ML model's performance to determine whether it can successfully predict heart disease (Business Requirement 2).
+
+### Epic - Dashboard Planning, Designing, and Development
+* **User Story** - As a non-technical user, I can view a project summary that describes the project, dataset and business requirements to understand the project at a glance.
+* **User Story** - As a non-technical user, I can view the project hypotheses and validations to determine what the project was trying to achieve and whether it was successful.
+* **User Story** - As a non-technical user, I can enter unseen data into the model and receive a prediction.
+* **User Story** - As a technical user, I can view the correlation analysis to see how the outcomes were reached.
+* **User Story** - As a technical user, I can view all the data to understand the model performance and see statistics related to the model.
+* **User Story** - As a non-technical user, I can view the project conclusions to see whether the model was successful and if the business requirements were met.
+
+### Epic - Dashboard Deployment and Release
+* **User Story** - As a user, I can view the project dashboard on a live deployed website.
+* **User Story** - As a technical user, I can follow instructions in the readme to fork the repository and deploy the project for myself.
 
 
 ## Dashboard Design
@@ -69,9 +133,17 @@ You can now use the `heroku` CLI program - try running `heroku apps` to confirm 
 * Later, during the project development, you may revisit your dashboard plan to update a given feature (for example, at the beginning of the project you were confident you would use a given plot to display an insight but subsequently you used another plot type).
 
 
+## Technologies Used
+* Here you should list the libraries you used in the project and provide an example(s) of how you used these libraries.
+
+
+## Testing
+* testing
+
 
 ## Unfixed Bugs
 * You will need to mention unfixed bugs and why they were not fixed. This section should include shortcomings of the frameworks or technologies used. Although time can be a significant variable to consider, paucity of time and difficulty understanding implementation is not a valid reason to leave bugs unfixed.
+
 
 ## Deployment
 ### Heroku
@@ -86,10 +158,6 @@ You can now use the `heroku` CLI program - try running `heroku apps` to confirm 
 4. Select the branch you want to deploy, then click Deploy Branch.
 5. The deployment process should happen smoothly if all deployment files are fully functional. Click now the button Open App on the top of the page to access your App.
 6. If the slug size is too large then add large files not required for the app to the .slugignore file.
-
-
-## Main Data Analysis and Machine Learning Libraries
-* Here you should list the libraries you used in the project and provide an example(s) of how you used these libraries.
 
 
 ## Credits 
@@ -110,6 +178,6 @@ You can now use the `heroku` CLI program - try running `heroku apps` to confirm 
 
 
 
-## Acknowledgements (optional)
+## Acknowledgements
 * Thank the people that provided support through this project.
 
