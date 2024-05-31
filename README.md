@@ -171,6 +171,8 @@ CVD Predictor is a machine-learning (ML) project using a publically available da
 - Instructions on how to implement form validation on the Sign-Up page was taken from [Specific YouTube Tutorial](https://www.youtube.com/)
 - The icons in the footer were taken from [Font Awesome](https://fontawesome.com/)
 
+- The code for the histogram/QQ plots and PPS score heatmaps were taken from the Code Institute "Churnometer" walkthrough project.
+
 ### Media
 
 - The photos used on the home and sign-up page are from This Open-Source site
