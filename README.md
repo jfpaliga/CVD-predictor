@@ -129,8 +129,34 @@ CVD Predictor is a machine-learning (ML) project using a publically available da
 
 
 ## Dashboard Design
-* List all dashboard pages and their content, either blocks of information or widgets, like buttons, checkboxes, images, or any other item that your dashboard library supports.
-* Later, during the project development, you may revisit your dashboard plan to update a given feature (for example, at the beginning of the project you were confident you would use a given plot to display an insight but subsequently you used another plot type).
+### Page 1: Project Summary
+* **Section 1 - Summary**
+    * Introduction to project
+    * Description of dataset, where was it sourced?
+    * Link to readme
+* **Section 2 - Business Requirements**
+    * Description of business requirements
+
+### Page 2: Project Hypotheses
+* Outline the three project hypothesis
+* Present validation of each hypothesis
+
+### Page 3: Feature Correlation Study
+* State business requirement 1
+* Overview of dataset - display first 5 rows of data and describe dataset shape
+* Display correlation results and PPS heatmap
+* Display distributions of correlated features against target
+* Conclusions
+
+### Page 4: Heart Disease Prediction
+* State business requirement 2
+* Widget inputs for prediction
+* "Run prediction" button to run inputted data through the ML model and output a prediction and % chance
+
+### Page 5: Classification Performance Metrics
+* Summary of model performance and metrics
+* Model pipeline, features used to train the model and how they were selected
+* Documentation of model performance on train and test sets
 
 
 ## Technologies Used
