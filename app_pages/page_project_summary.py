@@ -6,6 +6,13 @@ DATASET_DF = pd.read_csv(f"./inputs/datasets/raw/heart.csv").head(3)
 
 def page_project_summary_body():
 
+    st.write(
+        f"* [Project Summary](#project-summary)\n"
+        f"* [Project Dataset](#project-dataset)\n"
+        f"* [Feature Terminology](#feature-terminology)\n"
+        f"* [Business Requirements](#business-requirements)"
+    )
+    
     st.write("### Project Summary")
 
     st.write(
