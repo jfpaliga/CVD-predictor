@@ -9,6 +9,14 @@ def page_feat_correlation_body():
 
     st.write("### Feature Correlation Study")
 
+    st.write(
+        f"* [Business Requirement and Dataset](#business-requirement-1-data-visualisation-and-correlation-study)\n"
+        f"* [Summary of Correlation Analysis](#summary-of-correlation-analysis)\n"
+        f"* [Summary of PPS Analysis](#summary-of-pps-analysis)\n"
+        f"* [Analysis of Most Correlated Features](#analysis-of-most-correlated-features)\n"
+        f"* [Conclusions](#conclusions)\n"
+        )
+
     st.info(
         f"#### **Business Requirement 1**: Data Visualisation and Correlation Study\n\n"
         f"* We need to perform a correlation study to determine which features correlate most closely to the target.\n"
