@@ -198,6 +198,8 @@ CVD Predictor is a machine-learning (ML) project using a publically available da
 - The icons in the footer were taken from [Font Awesome](https://fontawesome.com/)
 
 - The code for the histogram/QQ plots and PPS score heatmaps were taken from the Code Institute "Churnometer" walkthrough project.
+- Other bits of code used from Code Institute, check all notebooks.
+- The parameters to optimise and related values were taken from Abhishek Thakur's ["Approaching (Almost) Any Machine Learning Problem"](https://www.linkedin.com/pulse/approaching-almost-any-machine-learning-problem-abhishek-thakur/) post on LinkedIn and Jason Brownlee's [Machine Learning Mastery](https://machinelearningmastery.com/hyperparameters-for-classification-machine-learning-algorithms/) website.
 
 ### Media
 
