@@ -1,4 +1,8 @@
 /.vscode
 /inputs
+/jupyer_notebooks
+/outputs/datasets/cleaned
 /outputs/images
+.gitpod.dockerfile
+.gitpod.yml
 README.md
