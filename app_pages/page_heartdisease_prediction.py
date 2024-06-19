@@ -25,7 +25,7 @@ def page_heartdisease_pred_body():
     X_live = DrawInputsWidgets()
 
     if st.button("Run Predictive Analysis"):
-        cvd_prediction = predict_live_heart_disease(
+        predict_live_heart_disease(
             X_live, dc_fe_pipeline, model_pipeline
         )
 

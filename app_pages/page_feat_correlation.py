@@ -1,9 +1,52 @@
 import streamlit as st
+import numpy as np
 import pandas as pd
+import ppscore as pps
 import matplotlib.pyplot as plt
+import seaborn as sns
+
+from src.utils import dc_no_encoding_pipeline, one_hot_encode
 
 
-DATASET_DF = pd.read_csv(f"./inputs/datasets/raw/heart.csv")
+raw_df = pd.read_csv(f"./inputs/datasets/raw/heart.csv")
+clean_df = dc_no_encoding_pipeline(raw_df)
+
+def correlation(df, method):
+
+    ohe_df = one_hot_encode(df)
+    corr = ohe_df.corr(method=method)["HeartDisease"].sort_values(key=abs, ascending=False)[1:].head(10)
+
+    return corr
+
+
+def heatmap_pps(df,threshold, figsize=(18,14), font_annot = 10):
+
+    pps_matrix_raw = pps.matrix(df)
+    pps_matrix_df = pps_matrix_raw.filter(["x", "y", "ppscore"]).pivot(columns="x", index="y", values="ppscore")
+
+    if len(pps_matrix_df.columns) > 1:
+
+      mask = np.zeros_like(pps_matrix_df, dtype=bool)
+      mask[abs(pps_matrix_df) < threshold] = True
+
+      fig, ax = plt.subplots(figsize=figsize)
+      ax = sns.heatmap(pps_matrix_df, annot=True, annot_kws={"size": font_annot},
+                       mask=mask,cmap='rocket_r', linewidth=0.05,
+                       linecolor='lightgrey')
+      
+      plt.ylim(len(pps_matrix_df.columns),0)
+      st.pyplot(fig)
+
+
+def plot_categorical(df, col):
+
+    fig, ax = plt.subplots(figsize=(14, 8))
+    ax = sns.countplot(data=df, x=col, hue="HeartDisease", order=df[col].value_counts().index)
+
+    plt.xticks(rotation=90)
+    plt.title(f"{col}", fontsize=20, y=1.05)
+    st.pyplot(fig)
+
 
 def page_feat_correlation_body():
 
@@ -26,8 +69,8 @@ def page_feat_correlation_body():
     )
 
     if st.checkbox("Inspect heart disease dataset"):
-        st.dataframe(DATASET_DF.head(5))
-        st.write(f"The dataset contains {DATASET_DF.shape[0]} observations with {DATASET_DF.shape[1]} attributes.")
+        st.dataframe(raw_df.head(5))
+        st.write(f"The dataset contains {raw_df.shape[0]} observations with {raw_df.shape[1]} attributes.")
 
     st.write("---")
 
@@ -38,13 +81,10 @@ def page_feat_correlation_body():
         f"* Both methods found the same correlation between features and target.\n"
     )
 
-    pearson_corr_results = plt.imread("outputs/images/pearson_correlation.png")
-    spearman_corr_results = plt.imread("outputs/images/spearman_correlation.png")
-
     if st.checkbox("View Pearson correlation results"):
-        st.image(pearson_corr_results)
+        st.write(correlation(clean_df, method="pearson"))
     if st.checkbox("View Spearman correlation results"):
-        st.image(spearman_corr_results)
+        st.write(correlation(clean_df, method="spearman"))
 
     st.write("---")
 
@@ -55,17 +95,10 @@ def page_feat_correlation_body():
         f"* The PPS analysis also indicated that the Oldpeak feature had some weak correlation to the target.\n"
     )
 
-    pps_heatmap = plt.imread("outputs/images/pps_heatmap.png")
-
     if st.checkbox("View PPS heatmap"):
-        st.image(pps_heatmap)
+        heatmap_pps(clean_df, 0.15)
 
     st.write("---")
-
-    chestpaintype_dist = plt.imread("outputs/images/ChestPainType_distribution.png")
-    exerciseangina_dist = plt.imread("outputs/images/ExerciseAngina_distribution.png")
-    oldpeak_dist = plt.imread("outputs/images/Oldpeak_distribution.png")
-    st_slope_dist = plt.imread("outputs/images/ST_Slope_distribution.png")
 
     st.write(
         f"#### **Analysis of Most Correlated Features**\n"
@@ -80,14 +113,7 @@ def page_feat_correlation_body():
         ("ChestPainType", "ExerciseAngina", "Oldpeak", "ST_Slope")
     )
 
-    if feature_distribution == "ChestPainType":
-        st.image(chestpaintype_dist)
-    elif feature_distribution == "ExerciseAngina":
-        st.image(exerciseangina_dist)
-    elif feature_distribution == "Oldpeak":
-        st.image(oldpeak_dist)
-    elif feature_distribution == "ST_Slope":
-        st.image(st_slope_dist)
+    plot_categorical(clean_df, feature_distribution)
 
     st.write("---")
 
