@@ -1,23 +1,33 @@
 import streamlit as st
 import pandas as pd
 
-from src.data_management import load_patient_data_raw
+from src.data_management import load_patient_data_raw, load_pkl_file
+from src.machine_learning.classification import predict_live_heart_disease
 
 def page_heartdisease_pred_body():
 
-    st.write(
-        f"* [Business Requirement](#business-requirement-2-classification-model)\n"
-        )
+    version = "v1"
+    dc_fe_pipeline = load_pkl_file(
+        f"outputs/ml_pipeline/classification_model/{version}/data_cleaning_and_feat_engineering_pipeline.pkl"
+    )
+    model_pipeline = load_pkl_file(
+        f"outputs/ml_pipeline/classification_model/{version}/classification_pipeline.pkl"
+    )
 
     st.info(
         f"#### **Business Requirement 2**: Classification Model\n\n"
         f"* The client is interested in using patient data to predict whether or not a patient is at risk of heart disease.\n"
         f"* A machine learning model was built using a binary classification model with the following success metrics:\n"
-        f"  * At least 90% recall for heart disease on train and test sets (no more than 10% missed positive predictions)."
+        f"  * At least 90% recall for heart disease on train and test sets (no more than 10% missed positive predictions).\n"
         f"  * At least 70% precision for no heart disease (reducing the number of false positives)."
     )
 
     X_live = DrawInputsWidgets()
+
+    if st.button("Run Predictive Analysis"):
+        cvd_prediction = predict_live_heart_disease(
+            X_live, dc_fe_pipeline, model_pipeline
+        )
 
 
 def DrawInputsWidgets():
@@ -84,7 +94,6 @@ def DrawInputsWidgets():
         st_widget = st.selectbox(
             label = feature,
             options = df[feature].unique(),
-            help = "1: if FastingBS > 120 mg/dl, 0: otherwise",
         )
     X_live[feature] = st_widget
 
