@@ -37,7 +37,7 @@ def page_project_summary_body():
         f"* **ChestPainType** - Category of chest pain: TA (typical angina), ATA (atypical angina), NAP (non-anginal pain), ASY (asymptomatic).\n"
         f"* **RestingBP** - Resting blood pressure (mm Hg).\n"
         f"* **Cholesterol** - Blood serum cholesterol (mm/dl).\n"
-        f"* **FastingBS** - Fasting blood sugar (1: >120 mg/dl, 0: otherwise).\n"
+        f"* **FastingBS** - high diabetes risk (>120 mg/dl), low diabetes risk (otherwise).\n"
         f"* **RestingECG** - Resting electrocardiogram results (Normal: Normal, ST: having ST-T wave abnormality, LVH: showing probable or definite left ventricular hypertrophy).\n"
         f"* **MaxHR** - Maximum heart rate achieved.\n"
         f"* **ExerciseAngina** - Exercise-induced angina (Y: Yes, N: No).\n"
