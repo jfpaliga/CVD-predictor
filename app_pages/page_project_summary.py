@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 
 
-DATASET_DF = pd.read_csv(f"./inputs/datasets/raw/heart.csv").head(3)
+DATASET_DF = pd.read_csv(f"outputs/datasets/collection/HeartDiseasePrediction.csv").head(3)
 
 def page_project_summary_body():
 
