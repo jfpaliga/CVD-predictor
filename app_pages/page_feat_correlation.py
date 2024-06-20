@@ -8,7 +8,7 @@ import seaborn as sns
 from src.utils import dc_no_encoding_pipeline, one_hot_encode
 
 
-raw_df = pd.read_csv(f"./inputs/datasets/raw/heart.csv")
+raw_df = pd.read_csv(f"outputs/datasets/collection/HeartDiseasePrediction.csv")
 clean_df = dc_no_encoding_pipeline(raw_df)
 
 def correlation(df, method):
