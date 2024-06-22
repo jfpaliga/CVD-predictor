@@ -2,10 +2,6 @@
 /.vscode
 /inputs
 /outputs/datasets/cleaned
-/outputs/ml_pipeline/classification_model/v1/X_test.csv
-/outputs/ml_pipeline/classification_model/v1/X_train.csv
-/outputs/ml_pipeline/classification_model/v1/y_test.csv
-/outputs/ml_pipeline/classification_model/v1/y_train.csv
 .gitpod.dockerfile
 .gitpod.yml
 README.md
