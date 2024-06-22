@@ -29,7 +29,9 @@ def page_project_hypotheses_body():
     )
     st.write(f"##### **Findings**:\n\n")
     st.warning(
-        f"* Enter findings from analysis of feature importance after hyperparameter optimisation.\n"
+        f"* The most important features from the model were found to be 'ST_Slope' and 'ChestPainType'.\n"
+        f"* However, when the model was refit using solely these two features, the recall and precision decreased to below the criteria set out in the business requirements."
+        f"* Therefore, while technically the model has only 2 'most important' features, all features were required for full model performance."
     )
 
     st.write(f"#### **Hypothesis 3**\n\n")
