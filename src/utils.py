@@ -30,4 +30,3 @@ def one_hot_encode(df):
     df_ohe = encoder.fit_transform(df)
 
     return df_ohe
-    
