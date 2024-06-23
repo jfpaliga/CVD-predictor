@@ -1,8 +1,8 @@
 *.ipynb
-/.vscode
-/inputs/*
-/jupyter_notebooks/*
-/outputs/datasets/cleaned/*
+.vscode
+inputs/*
+jupyter_notebooks/*
+outputs/datasets/cleaned/*
 .gitpod.dockerfile
 .gitpod.yml
 README.md
