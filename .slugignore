@@ -1,6 +1,7 @@
 *.ipynb
 /.vscode
 /inputs
+/jupyter_notebooks
 /outputs/datasets/cleaned
 .gitpod.dockerfile
 .gitpod.yml
