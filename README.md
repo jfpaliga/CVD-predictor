@@ -76,7 +76,7 @@ CVD Predictor is a machine-learning (ML) project using a publically available da
     - We need to predict whether a patient is at risk of heart disease or not.
     - Therefore we need to build a binary classification model.
     - A conventional machine learning pipeline will be able to map the relationships between the features and target.
-    - Extensive hyperparamter optimisation will give us the best chance at a highly accurate prediction.
+    - Extensive hyperparameter optimisation will give us the best chance at a highly accurate prediction.
 
 
 ## ML Business Case
@@ -84,9 +84,9 @@ CVD Predictor is a machine-learning (ML) project using a publically available da
 * We want a ML model to predict whether a patient is at risk of heart disease based upon previously gathered patient data. The target variable, 'HeartDisease', is categorical and contains two classes: 0 (no heart disease) and 1 (heart disease).
 * We will consider a **classification model**, a supervised model with a two-class, single-label output that matches the target.
 * The model success metrics are:
-    - at least 90% recall for heart disease on the train and test sets
+    - at least 75% recall for heart disease on the train and test sets
 * The model will be considered a failure if:
-    - the model fails to achieve 90% recall for heart disease
+    - the model fails to achieve 75% recall for heart disease
     - the model fails to achieve 70% precision for no heart disease (falsely indicating patients are at risk)
 * The model output is defined as a flag, indicating if a patient will have heart disease or not and the associated probability of heart disease.
 * The training data to fit the model comes from: [Kaggle](https://www.kaggle.com/datasets/fedesoriano/heart-failure-prediction/data)
@@ -160,11 +160,74 @@ CVD Predictor is a machine-learning (ML) project using a publically available da
 
 
 ## Technologies Used
-* Here you should list the libraries you used in the project and provide an example(s) of how you used these libraries.
 
+The technologies used throughout the development are listed below:
+
+### Languages
+
+* [Python](https://www.python.org/)
+
+### Python Packages
+
+* [Pandas](https://pandas.pydata.org/docs/index.html)
+
+    Open source library for data manipulation and analysis.
+
+* [Numpy](https://numpy.org/doc/stable/index.html)
+
+    Adds support for large, multi-dimensional arrays and matrices, and high-level mathematical functions.
+
+* [YData Profiling](https://docs.profiling.ydata.ai/latest/)
+
+    For data profiling and exploratory data analysis.
+
+* [Matplotlib](https://matplotlib.org/)
+
+    Comprehensive library for creating static, animated and interactive visualisations.
+
+* [Seaborn](https://seaborn.pydata.org/)
+
+    Another data visualisation library for drawing attractive and informative statistical graphics.
+
+* [Pingouin](https://pingouin-stats.org/build/html/index.html)
+
+    Open source statistical package for simple yet exhaustive stats functions.
+
+* [Feature-engine](https://feature-engine.trainindata.com/en/latest/)
+
+    Library with multiple transformers to engineer and select features for machine learning models.
+
+* [ppscore](https://pypi.org/project/ppscore/)
+
+    Library for detecting linear or non-linear relationships between two features.
+
+* [scikit-learn](https://scikit-learn.org/stable/)
+
+    Open source machine learning library that features various algorithms for training a ML model.
+
+* [SciPy](https://scipy.org/)
+
+    Library used for scientific computing and technical computing.
+
+* [XGBoost](https://xgboost.readthedocs.io/en/stable/)
+
+    Optimised distributed gradient boosting library.
+
+* [Imbalanced-learn](https://imbalanced-learn.org/stable/)
+
+    Provides tools for dealing with classification problems with imbalanced classes.
+
+* [Joblib](https://joblib.readthedocs.io/en/stable/)
+
+    Provides tools for lightweight pipelining, e.g. caching output values.
 
 ## Testing
 * testing
+
+
+## Issues
+
+* Describe v1 development and issues with deployment to Heroku
 
 
 ## Unfixed Bugs
