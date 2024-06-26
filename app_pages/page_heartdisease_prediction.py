@@ -6,7 +6,7 @@ from src.machine_learning.classification import predict_live_heart_disease
 
 def page_heartdisease_pred_body():
 
-    version = "v1"
+    version = "v2"
     dc_fe_pipeline = load_pkl_file(
         f"outputs/ml_pipeline/classification_model/{version}/data_cleaning_and_feat_engineering_pipeline.pkl"
     )
