@@ -1,11 +1,12 @@
 import streamlit as st
 import numpy as np
 import pandas as pd
+import plotly.express as px
 import ppscore as pps
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-from src.utils import dc_no_encoding_pipeline, one_hot_encode
+from src.utils import dc_no_encoding_pipeline, one_hot_encode, dc_all_cat_pipeline, map_discretisation
 
 
 raw_df = pd.read_csv(f"outputs/datasets/collection/HeartDiseasePrediction.csv")
@@ -48,6 +49,18 @@ def plot_categorical(df, col):
     st.pyplot(fig)
 
 
+def parallel_plot(df):
+
+    pplot_df = dc_all_cat_pipeline(df)
+    pplot_df = map_discretisation(pplot_df)
+
+    columns = pplot_df.drop(["HeartDisease"], axis=1).columns.to_list()
+    fig = px.parallel_categories(pplot_df, color="HeartDisease",
+                                 dimensions=columns,
+                                 color_continuous_scale="bluered",)
+    st.plotly_chart(fig)
+
+
 def page_feat_correlation_body():
 
     st.write("### Feature Correlation Study")
@@ -57,6 +70,7 @@ def page_feat_correlation_body():
         f"* [Summary of Correlation Analysis](#summary-of-correlation-analysis)\n"
         f"* [Summary of PPS Analysis](#summary-of-pps-analysis)\n"
         f"* [Analysis of Most Correlated Features](#analysis-of-most-correlated-features)\n"
+        f"* [Feature Relationships](#feature-relationships)"
         f"* [Conclusions](#conclusions)\n"
         )
 
@@ -114,6 +128,21 @@ def page_feat_correlation_body():
     )
 
     plot_categorical(clean_df, feature_distribution)
+
+    st.write("---")
+
+    st.write(
+        f"#### **Feature Relationships**\n"
+        f"* A parallel plot was used to further assess the relationships between features.\n"
+        f"* The plot shows imbalance in some of the features, e.g. sex of the patients.\n"
+        f"* Despite this, some general trends can be observed:\n"
+        f"  * Risk of heart disease increases with age.\n"
+        f"  * Male patients tend to be at greater risk.\n"
+        f"  * High diabetes risk patients were more prone to heart disease.\n"
+    )
+
+    if st.checkbox("View parallel plot"):
+        parallel_plot(raw_df)
 
     st.write("---")
 
