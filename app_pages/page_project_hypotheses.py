@@ -30,7 +30,7 @@ def page_project_hypotheses_body():
     st.write(f"##### **Findings**:\n\n")
     st.warning(
         f"* The most important features from the model were found to be 'ST_Slope' and 'ChestPainType'.\n"
-        f"* However, when the model was refit using solely these two features, the recall and precision decreased to below the criteria set out in the business requirements."
+        f"* However, when the model was refit using solely these two features, the recall and precision decreased to below the criteria set out in the business requirements.\n"
         f"* Therefore, while technically the model has only 2 'most important' features, all features were required for full model performance."
     )
 
@@ -40,5 +40,9 @@ def page_project_hypotheses_body():
     )
     st.write(f"##### **Findings**:\n\n")
     st.success(
-        f"* Enter findings here."
+        f"* A parallel plot to visualise trends in features was used to assess this hypothesis.\n"
+        f"* It found that risk of heart disease increased with age.\n"
+        f"* It also found that male patients were more prone to heart disease, however the dataset was imbalanced in favour of male patients.\n"
+        f"* Cholesterol appeared to have no impact on heart disease, although this may be due to the data collected having a large number of '0' values.\n"
+        f"* Therefore, our hypothesis was only partially correct."
     )
