@@ -70,7 +70,7 @@ def page_feat_correlation_body():
         f"* [Summary of Correlation Analysis](#summary-of-correlation-analysis)\n"
         f"* [Summary of PPS Analysis](#summary-of-pps-analysis)\n"
         f"* [Analysis of Most Correlated Features](#analysis-of-most-correlated-features)\n"
-        f"* [Feature Relationships](#feature-relationships)"
+        f"* [Feature Relationships](#feature-relationships)\n"
         f"* [Conclusions](#conclusions)\n"
         )
 
