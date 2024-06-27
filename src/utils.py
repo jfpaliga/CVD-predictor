@@ -24,6 +24,45 @@ def dc_no_encoding_pipeline(df):
 
     return clean_df
 
+
+def dc_all_cat_pipeline(df):
+
+    pipeline = Pipeline([
+    ("median_imputation", MeanMedianImputer(imputation_method="median",
+                                            variables=["RestingBP"])),
+    ("random_sample_imputation", RandomSampleImputer(random_state=1,
+                                                        seed='general',
+                                                        variables=["Cholesterol"])),
+    ("arbitrary_discretisation", ArbitraryDiscretiser(binning_dict={
+        "Age":[-np.inf, 40, 50, 60, np.inf],
+        "RestingBP":[-np.inf, 120, 130, 140, np.inf],
+        "Cholesterol":[-np.inf, 173, 223, 267, np.inf],
+        "MaxHR":[-np.inf, 120, 138, 156, np.inf],
+        "Oldpeak":[-np.inf, 0, 1.5, np.inf],
+        })),
+    ])
+
+    clean_df = pipeline.fit_transform(df)
+
+    return clean_df
+
+
+def map_discretisation(df):
+
+    map_dict = {
+        "Age":{0: "≤ 40", 1: "40 ≤ 50", 2: "50 ≤ 60", 3: "> 60"},
+        "RestingBP":{0: "≤ 120", 1: "120 ≤ 130", 2: "130 ≤ 140", 3: "> 140"},
+        "Cholesterol":{0: "≤ 173", 1: "173 ≤ 223", 2: "223 ≤ 267", 3: "> 267"},
+        "MaxHR":{0: "≤ 120", 1: "120 ≤ 138", 2: "138 ≤ 156", 3: "> 156"},
+        "Oldpeak":{0: "≤ 0", 1: "0 ≤ 1.5", 2: "> 1.5"},
+        }
+    
+    for k in map_dict:
+        df[k].replace(to_replace=map_dict[k], inplace=True)
+
+    return df
+
+
 def one_hot_encode(df):
 
     encoder = OneHotEncoder(variables=df.columns[df.dtypes=="object"].to_list(), drop_last=False)
