@@ -2,7 +2,7 @@
 
 Live link here - PLACEHOLDER
 
-CVD Predictor is a machine-learning (ML) project using a publically available dataset to determine whether a ML pipeline could be built in order to predict whether a patient is at risk of heart disease. This was achieved by using a classification task, using the HeartDisease attribute from the dataset as the target and the remaining attributes as features.
+[CVD Predictor](https://cvd-predictor-a8ce111af1d1.herokuapp.com/) is a machine-learning (ML) project using a publically available dataset to determine whether a ML pipeline could be built in order to predict whether a patient is at risk of heart disease. This was achieved by using a classification task, using the HeartDisease attribute from the dataset as the target and the remaining attributes as features.
 
 ## Table of Contents
 
@@ -237,7 +237,7 @@ The technologies used throughout the development are listed below:
 ## Deployment
 ### Heroku
 
-* The App live link is: https://YOUR_APP_NAME.herokuapp.com/ 
+* The App live link is: [CVD Predictor](https://cvd-predictor-a8ce111af1d1.herokuapp.com/)
 * Set the runtime.txt Python version to a [Heroku-20](https://devcenter.heroku.com/articles/python-support#supported-runtimes) stack currently supported version.
 * The project was deployed to Heroku using the following steps.
 
@@ -250,9 +250,6 @@ The technologies used throughout the development are listed below:
 
 
 ## Credits 
-
-* In this section, you need to reference where you got your content, media and extra help from. It is common practice to use code from other repositories and tutorials, however, it is important to be very specific about these sources to avoid plagiarism. 
-* You can break the credits section up into Content and Media, depending on what you have included in your project. 
 
 ### Content 
 
