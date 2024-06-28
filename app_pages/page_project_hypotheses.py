@@ -29,9 +29,9 @@ def page_project_hypotheses_body():
     )
     st.write(f"##### **Findings**:\n\n")
     st.warning(
-        f"* The most important features from the model were found to be 'ST_Slope' and 'ChestPainType'.\n"
-        f"* However, when the model was refit using solely these two features, the recall and precision decreased to below the criteria set out in the business requirements.\n"
-        f"* Therefore, while technically the model has only 2 'most important' features, all features were required for full model performance."
+        f"* The most important features from the model were found to be 'ST_Slope', 'ChestPainType', 'MaxHR', 'Age' and 'Cholesterol'.\n"
+        f"* Despite the findings in the correlation studies, MaxHR, Age and Cholesterol were found to be necessary for the ML to make a prediction.\n"
+        f"* 5 of the 11 features were necessary for a successful, so our hypothesis was correct."
     )
 
     st.write(f"#### **Hypothesis 3**\n\n")

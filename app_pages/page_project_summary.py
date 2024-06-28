@@ -2,7 +2,9 @@ import streamlit as st
 import pandas as pd
 
 
-DATASET_DF = pd.read_csv(f"outputs/datasets/collection/HeartDiseasePrediction.csv").head(3)
+DATASET_DF = pd.read_csv(
+    f"outputs/datasets/collection/HeartDiseasePrediction.csv").head(3)
+
 
 def page_project_summary_body():
 
@@ -12,11 +14,11 @@ def page_project_summary_body():
         f"* [Feature Terminology](#feature-terminology)\n"
         f"* [Business Requirements](#business-requirements)"
     )
-    
+
     st.write("### Project Summary")
 
     st.write(
-        f"Cardiovascular diseases are the number 1 cause of death globally, accounting for 31% of all deaths worldwide. People with cardiovascular disease or who are at high risk of disease need early detection and management.\n\n" 
+        f"Cardiovascular diseases are the number 1 cause of death globally, accounting for 31% of all deaths worldwide. People with cardiovascular disease or who are at high risk of disease need early detection and management.\n\n"
         f"A fictional organisation has requested a data practitioner to analyse a dataset of patients from a number of different hospitals in order to determine what factors can be attributed to a high risk of disease and whether patient data can accurately predict risk of heart disease.\n\n"
         f"* For further information, please visit and **read** the [project documentation](https://github.com/jfpaliga/CVD-predictor)."
     )

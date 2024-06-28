@@ -4,6 +4,7 @@ import pandas as pd
 from src.data_management import load_patient_data_raw, load_pkl_file
 from src.machine_learning.classification import predict_live_heart_disease
 
+
 def page_heartdisease_pred_body():
 
     version = "v2"
@@ -18,7 +19,7 @@ def page_heartdisease_pred_body():
         f"#### **Business Requirement 2**: Classification Model\n\n"
         f"* The client is interested in using patient data to predict whether or not a patient is at risk of heart disease.\n"
         f"* A machine learning model was built using a binary classification model with the following success metrics:\n"
-        f"  * At least 90% recall for heart disease on train and test sets (no more than 10% missed positive predictions).\n"
+        f"  * At least 75% recall for heart disease on train and test sets (no more than 25% missed positive predictions).\n"
         f"  * At least 70% precision for no heart disease (reducing the number of false positives)."
     )
 
@@ -43,104 +44,104 @@ def DrawInputsWidgets():
     with col1:
         feature = "Age"
         st_widget = st.number_input(
-            label = feature,
-            min_value = 18,
-            max_value = 80,
-            value = int(df[feature].median()),
-            step = 1,
+            label=feature,
+            min_value=18,
+            max_value=80,
+            value=int(df[feature].median()),
+            step=1,
         )
     X_live[feature] = st_widget
 
     with col2:
         feature = "Sex"
         st_widget = st.selectbox(
-            label = feature,
-            options = df[feature].unique(),
+            label=feature,
+            options=df[feature].unique(),
         )
     X_live[feature] = st_widget
 
     with col3:
         feature = "ChestPainType"
         st_widget = st.selectbox(
-            label = feature,
-            options = df[feature].unique(),
-            help = "TA: Typical Angina, ATA: Atypical Angina, NAP: Non-Anginal Pain, ASY: Asymptomatic",
+            label=feature,
+            options=df[feature].unique(),
+            help="TA: Typical Angina, ATA: Atypical Angina, NAP: Non-Anginal Pain, ASY: Asymptomatic",
         )
     X_live[feature] = st_widget
 
     with col4:
         feature = "RestingBP"
         st_widget = st.number_input(
-            label = feature,
-            min_value = 60,
-            max_value = df[feature].max(),
-            value = int(df[feature].median()),
-            step = 1,
+            label=feature,
+            min_value=60,
+            max_value=df[feature].max(),
+            value=int(df[feature].median()),
+            step=1,
         )
     X_live[feature] = st_widget
 
     with col5:
         feature = "Cholesterol"
         st_widget = st.number_input(
-            label = feature,
-            min_value = 85,
-            max_value = df[feature].max(),
-            step = 1,
+            label=feature,
+            min_value=85,
+            max_value=df[feature].max(),
+            step=1,
         )
     X_live[feature] = st_widget
 
     with col6:
         feature = "FastingBS"
         st_widget = st.selectbox(
-            label = feature,
-            options = df[feature].unique(),
+            label=feature,
+            options=df[feature].unique(),
         )
     X_live[feature] = st_widget
 
     with col7:
         feature = "RestingECG"
         st_widget = st.selectbox(
-            label = feature,
-            options = df[feature].unique(),
-            help = "Normal: Normal, ST: having ST-T wave abnormality (T wave inversions and/or ST elevation or depression of > 0.05 mV), LVH: showing probable or definite left ventricular hypertrophy by Estes' criteria"
+            label=feature,
+            options=df[feature].unique(),
+            help="Normal: Normal, ST: having ST-T wave abnormality (T wave inversions and/or ST elevation or depression of > 0.05 mV), LVH: showing probable or definite left ventricular hypertrophy by Estes' criteria"
         )
     X_live[feature] = st_widget
 
     with col8:
         feature = "MaxHR"
         st_widget = st.number_input(
-            label = feature,
-            min_value = 60,
-            max_value = 202,
-            step = 1,
+            label=feature,
+            min_value=60,
+            max_value=202,
+            step=1,
         )
     X_live[feature] = st_widget
 
     with col9:
         feature = "ExerciseAngina"
         st_widget = st.selectbox(
-            label = feature,
-            options = df[feature].unique(),
+            label=feature,
+            options=df[feature].unique(),
         )
     X_live[feature] = st_widget
 
     with col10:
         feature = "Oldpeak"
         st_widget = st.number_input(
-            label = feature,
-            min_value = df[feature].min(),
-            max_value = df[feature].max(),
-            step = 0.1,
-            help = "ST depression induced by exercise relative to rest"
+            label=feature,
+            min_value=df[feature].min(),
+            max_value=df[feature].max(),
+            step=0.1,
+            help="ST depression induced by exercise relative to rest"
         )
     X_live[feature] = st_widget
 
     with col11:
         feature = "ST_Slope"
         st_widget = st.selectbox(
-            label = feature,
-            options = df[feature].unique(),
-            help = "The slope of the peak exercise ST segment",
+            label=feature,
+            options=df[feature].unique(),
+            help="The slope of the peak exercise ST segment",
         )
     X_live[feature] = st_widget
 

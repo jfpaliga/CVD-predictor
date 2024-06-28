@@ -6,43 +6,61 @@ import ppscore as pps
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-from src.utils import dc_no_encoding_pipeline, one_hot_encode, dc_all_cat_pipeline, map_discretisation
+from src.utils import dc_no_encoding_pipeline, one_hot_encode
+from src.utils import dc_all_cat_pipeline, map_discretisation
 
 
 raw_df = pd.read_csv(f"outputs/datasets/collection/HeartDiseasePrediction.csv")
 clean_df = dc_no_encoding_pipeline(raw_df)
 
+
 def correlation(df, method):
+    """
+    Perform one hot encoding on a Dataframe and
+    return the absolute values of correlation to
+    the target in descending order
+    """
 
     ohe_df = one_hot_encode(df)
-    corr = ohe_df.corr(method=method)["HeartDisease"].sort_values(key=abs, ascending=False)[1:].head(10)
+    corr = ohe_df.corr(method=method)["HeartDisease"].sort_values(
+        key=abs, ascending=False)[1:].head(10)
 
     return corr
 
 
-def heatmap_pps(df,threshold, figsize=(18,14), font_annot = 10):
+def heatmap_pps(df, threshold, figsize=(18, 14), font_annot=10):
+    """
+    Calculate a PPS matrix from a Dataframe then plot
+    a heatmap using a threshold
+    """
 
     pps_matrix_raw = pps.matrix(df)
-    pps_matrix_df = pps_matrix_raw.filter(["x", "y", "ppscore"]).pivot(columns="x", index="y", values="ppscore")
+    pps_matrix_df = pps_matrix_raw.filter(["x", "y", "ppscore"]).pivot(
+        columns="x", index="y", values="ppscore")
 
     if len(pps_matrix_df.columns) > 1:
+        mask = np.zeros_like(pps_matrix_df, dtype=bool)
+        mask[abs(pps_matrix_df) < threshold] = True
 
-      mask = np.zeros_like(pps_matrix_df, dtype=bool)
-      mask[abs(pps_matrix_df) < threshold] = True
+        fig, ax = plt.subplots(figsize=figsize)
+        ax = sns.heatmap(pps_matrix_df, annot=True,
+                         annot_kws={"size": font_annot},
+                         mask=mask, cmap='rocket_r', linewidth=0.05,
+                         linecolor='lightgrey')
 
-      fig, ax = plt.subplots(figsize=figsize)
-      ax = sns.heatmap(pps_matrix_df, annot=True, annot_kws={"size": font_annot},
-                       mask=mask,cmap='rocket_r', linewidth=0.05,
-                       linecolor='lightgrey')
-      
-      plt.ylim(len(pps_matrix_df.columns),0)
-      st.pyplot(fig)
+        plt.ylim(len(pps_matrix_df.columns), 0)
+        st.pyplot(fig)
 
 
 def plot_categorical(df, col):
+    """
+    Plot a count plot of a given column in a Dataframe
+    """
 
     fig, ax = plt.subplots(figsize=(14, 8))
-    ax = sns.countplot(data=df, x=col, hue="HeartDisease", order=df[col].value_counts().index)
+    ax = sns.countplot(data=df, x=col,
+                       hue="HeartDisease",
+                       order=df[col].value_counts().index)
 
     plt.xticks(rotation=90)
     plt.title(f"{col}", fontsize=20, y=1.05)
@@ -50,6 +68,9 @@ def plot_categorical(df, col):
 
 
 def parallel_plot(df):
+    """
+    Plot a categorical parallel plot from a Dataframe
+    """
 
     pplot_df = dc_all_cat_pipeline(df)
     pplot_df = map_discretisation(pplot_df)
