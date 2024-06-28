@@ -159,12 +159,6 @@
 
 ## Technologies Used
 
-**WARNING:** The packages listed in the requirements.txt file are limited to those necessary for the deployment of the dashboard to Heroku, due to the limit on the slug size.
-
-* Please see the full-requirements.txt file for a comprehensive list of packages required for running the Jupyter notebooks.
-
----
-
 The technologies used throughout the development are listed below:
 
 ### Languages
@@ -262,6 +256,29 @@ The technologies used throughout the development are listed below:
 4. Select the branch you want to deploy, then click Deploy Branch.
 5. The deployment process should happen smoothly if all deployment files are fully functional. Click now the button Open App on the top of the page to access your App.
 6. If the slug size is too large then add large files not required for the app to the .slugignore file.
+
+## Forking and Cloning
+If you wish to fork or clone this repository, please follow the instructions below:
+
+### Forking
+1. In the top right of the repository page, click the **Fork** button.
+2. Under **Owner**, select the desired owner from the dropdown menu.
+3. **OPTIONAL:** Change the default name of the repository in order to distinguish it.
+4. **OPTIONAL:** In the **Description** field, enter a description for the forked repository.
+5. Ensure the 'Copy the main branch only' checkbox is selected.
+6. Click the **Create fork** button.
+
+### Cloning
+To clone the repository onto your local system, in your IDE terminal enter the following command:
+
+    git clone https://github.com/jfpaliga/CVD-predictor.git
+
+### Installing Requirements
+**WARNING:** The packages listed in the requirements.txt file are limited to those necessary for the deployment of the dashboard to Heroku, due to the limit on the slug size.
+
+In order to ensure all the correct dependencies are installed in your local environment, run the following command in the terminal:
+
+    pip install -r full-requirements.txt
 
 
 ## Credits 
