@@ -3,6 +3,9 @@ import streamlit as st
 
 def predict_live_heart_disease(X_live, dc_fe_pipeline, model_pipeline):
 
+    features = ["ST_Slope", "ChestPainType", "MaxHR", "Age", "Cholesterol"]
+    X_live = X_live.filter(features)
+
     X_live_dc_fe = dc_fe_pipeline.transform(X_live)
 
     cvd_prediction = model_pipeline.predict(X_live_dc_fe)
