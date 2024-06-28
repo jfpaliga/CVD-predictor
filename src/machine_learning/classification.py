@@ -2,6 +2,10 @@ import streamlit as st
 
 
 def predict_live_heart_disease(X_live, dc_fe_pipeline, model_pipeline):
+    """
+    Filter live data to relevant features then process the data through
+    the ML pipelines and provide a prediction on heart disease
+    """
 
     features = ["ST_Slope", "ChestPainType", "MaxHR", "Age", "Cholesterol"]
     X_live = X_live.filter(features)
