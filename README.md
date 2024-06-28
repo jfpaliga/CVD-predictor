@@ -124,9 +124,9 @@
 ### Epic - Dashboard Planning, Designing, and Development
 * **User Story** - As a non-technical user, I can view a project summary that describes the project, dataset and business requirements to understand the project at a glance.
 * **User Story** - As a non-technical user, I can view the project hypotheses and validations to determine what the project was trying to achieve and whether it was successful.
-* **User Story** - As a non-technical user, I can enter unseen data into the model and receive a prediction.
-* **User Story** - As a technical user, I can view the correlation analysis to see how the outcomes were reached.
-* **User Story** - As a technical user, I can view all the data to understand the model performance and see statistics related to the model.
+* **User Story** - As a non-technical user, I can enter unseen data into the model and receive a prediction (**Business Requirement 2**).
+* **User Story** - As a technical user, I can view the correlation analysis to see how the outcomes were reached (**Business Requirement 1**).
+* **User Story** - As a technical user, I can view all the data to understand the model performance and see statistics related to the model (**Business Requirement 2**).
 * **User Story** - As a non-technical user, I can view the project conclusions to see whether the model was successful and if the business requirements were met.
 
 ### Epic - Dashboard Deployment and Release
@@ -201,7 +201,69 @@ The technologies used throughout the development are listed below:
 [Back to top](#table-of-contents)
 
 ## Testing
-* testing
+### Manual Testing
+
+#### User Story Testing
+* Dashboard was manually tested using user stories as a basis for determining success.
+* Jupyter notebooks were reliant on consecutive functions being successful so manual testing against user stories was deemed irrelevant.
+
+*As a non-technical user, I can view a project summary that describes the project, dataset and business requirements to understand the project at a glance.*
+
+| Feature | Action | Expected Result | Actual Result |
+| --- | --- | --- | --- |
+| Project summary page | Viewing summary page | Page is displayed, can move between sections on page | Functions as intended |
+
+---
+
+*As a non-technical user, I can view the project hypotheses and validations to determine what the project was trying to achieve and whether it was successful.*
+
+| Feature | Action | Expected Result | Actual Result |
+| --- | --- | --- | --- |
+| Project hypotheses page | Navigate to page | Clicking on navbar link in sidebar navigates to correct page | Functions as intended |
+
+---
+
+*As a non-technical user, I can enter unseen data into the model and receive a prediction (Business Requirement 2).*
+
+| Feature | Action | Expected Result | Actual Result |
+| --- | --- | --- | --- |
+| Prediction page | Navigate to page | Clicking on navbar link in sidebar navigates to correct page | Functions as intended |
+| Enter live data | Interact with widgets | All widgets are interactive, respond to user input | Functions as intended |
+| Live prediction | Click on 'Run Predictive Analysis' button | Clicking on button displays message on page with prediction and % chance | Functions as intended |
+
+---
+
+*As a technical user, I can view the correlation analysis to see how the outcomes were reached (Business Requirement 1).*
+
+| Feature | Action | Expected Result | Actual Result |
+| --- | --- | --- | --- |
+| Correlation Study page | Navigate to page | Clicking on navbar link in sidebar navigates to correct page | Functions as intended |
+| Correlation data | Tick correlation results checkbox | Correlation data is displayed on dashboard | Functions as intended |
+| PPS Heatmap | Tick PPS heatmap checkbox | Heatmap is displayed on dashboard | Functions as intended |
+| Feature Correlation | Select feature from dropdown box | Relevant countplot is displayed | Functions as intended |
+| Parallel Plot | Tick parallel plot checkbox | Parallel plot is displayed on dashboard, is interactive | Functions as intended |
+
+---
+
+*As a technical user, I can view all the data to understand the model performance and see statistics related to the model (Business Requirement 2)*
+
+| Feature | Action | Expected Result | Actual Result |
+| --- | --- | --- | --- |
+| Model performance page | Navigate to page | Clicking on navbar link in sidebar navigates to correct page | Functions as intended |
+| Success metrics | View page | Success metrics outlined in business case are displayed | Functions as intended |
+| ML Pipelines | View page | Both ML Pipelines from Jupyter notebooks are displayed | Functions as intended |
+| Feature Importance | View page | Most important features are plotted and displayed | Functions as intended |
+| Model Performance | View page | Confusion matrix for train and test sets are displayed | Functions as intended |
+
+---
+
+### Validation
+All code in the app_pages and src directories was validated as conforming to PEP8 standards using CodeInstitute's PEP8 Linter.
+* Some files had warnings due to 'line too long', however these were related to long strings when writing to the dashboard.
+* These warnings were ignored as it did not effect the readability of any functions.
+
+### Automated Unit Tests
+No automated unit tests have been carried out at this time.
 
 [Back to top](#table-of-contents)
 
@@ -235,15 +297,40 @@ The technologies used throughout the development are listed below:
 ### Heroku
 
 * The App live link is: [CVD Predictor](https://cvd-predictor-a8ce111af1d1.herokuapp.com/)
-* Set the runtime.txt Python version to a [Heroku-20](https://devcenter.heroku.com/articles/python-support#supported-runtimes) stack currently supported version.
-* The project was deployed to Heroku using the following steps.
 
-1. Log in to Heroku and create an App
-2. At the Deploy tab, select GitHub as the deployment method.
-3. Select your repository name and click Search. Once it is found, click Connect.
-4. Select the branch you want to deploy, then click Deploy Branch.
-5. The deployment process should happen smoothly if all deployment files are fully functional. Click now the button Open App on the top of the page to access your App.
-6. If the slug size is too large then add large files not required for the app to the .slugignore file.
+The project was deployed to Heroku using the following steps:
+
+1. Within your working directory, ensure there is a setup.sh file containing the following:
+```
+mkdir -p ~/.streamlit/
+echo "\
+[server]\n\
+headless = true\n\
+port = $PORT\n\
+enableCORS = false\n\
+\n\
+" > ~/.streamlit/config.toml
+```
+2. Within your working directory, ensure there is a runtime.txt file containing a [Heroku-20](https://devcenter.heroku.com/articles/python-support#supported-runtimes) stack supported version of Python.
+```
+python-3.10.12
+```
+3. Within your working directory, ensure there is a Procfile file containing the following:
+```
+web: sh setup.sh && streamlit run app.py
+```
+4. Ensure your requirements.txt file contains all the packages necessary to run the streamlit dashboard.
+5. Update your .gitignore and .slugignore files with any files/directories that you do not want uploading to GitHub or are unnecessary for deployment.
+6. Log in to [Heroku](https://id.heroku.com/login) or create an account if you do not already have one.
+7. Click the **New** button on the dashboard and from the dropdown menu select "Create new app".
+8. Enter a suitable app name and select your region, then click the **Create app** button.
+9. Once the app has been created, navigate to the Deploy tab.
+10. At the Deploy tab, in the Deployment method section select **GitHub**.
+11. Enter your repository name and click **Search**. Once it is found, click **Connect**.
+12. Navigate to the bottom of the Deploy page to the Manual deploy section and select main from the branch dropdown menu.
+13. Click the **Deploy Branch** button to begin deployment.
+14. The deployment process should happen smoothly if all deployment files are fully functional. Click the button **Open App** at the top of the page to access your App.
+15. If the build fails, check the build log carefully to troubleshoot what went wrong.
 
 [Back to top](#table-of-contents)
 
@@ -251,7 +338,7 @@ The technologies used throughout the development are listed below:
 If you wish to fork or clone this repository, please follow the instructions below:
 
 ### Forking
-1. In the top right of the repository page, click the **Fork** button.
+1. In the top right of the main repository page, click the **Fork** button.
 2. Under **Owner**, select the desired owner from the dropdown menu.
 3. **OPTIONAL:** Change the default name of the repository in order to distinguish it.
 4. **OPTIONAL:** In the **Description** field, enter a description for the forked repository.
@@ -259,9 +346,11 @@ If you wish to fork or clone this repository, please follow the instructions bel
 6. Click the **Create fork** button.
 
 ### Cloning
-To clone the repository onto your local system, in your IDE terminal enter the following command:
-
-    git clone https://github.com/jfpaliga/CVD-predictor.git
+1. On the main repository page, click the **Code** button.
+2. Copy the HTTPS URL from the resulting dropdown menu.
+3. In your IDE terminal, navigate to the directory you want the cloned repository to be created.
+4. In your IDE terminal, type ```git clone``` and paste the copied URL.
+5. Hit Enter to create the cloned repository.
 
 ### Installing Requirements
 **WARNING:** The packages listed in the requirements.txt file are limited to those necessary for the deployment of the dashboard to Heroku, due to the limit on the slug size.
@@ -277,7 +366,8 @@ In order to ensure all the correct dependencies are installed in your local envi
 ### Content 
 
 #### Exploratory Data Analysis Notebook
-* The code for the histogram/QQ plots and PPS score heatmaps were taken from the Code Institute "Churnometer" walkthrough project.
+* The code for the histogram/QQ plots were taken from the Code Institute "Churnometer" walkthrough project.
+* The code for the PPS heatmap function was taken from the Code Institute "Exploratory Data Analysis Tools" module.
 
 #### Data Cleaning Notebook
 * The custom function for checking the effect of data cleaning on distribution was taken from the Code Institute "Data Analytics Packages - ML: feature-engine" module.
@@ -296,6 +386,6 @@ In order to ensure all the correct dependencies are installed in your local envi
 [Back to top](#table-of-contents)
 
 ## Acknowledgements
-* Thank the people that provided support through this project.
+* Thanks to my mentor Mo Shami, for his support and guidance on the execution of the project
 
 [Back to top](#table-of-contents)
