@@ -1,7 +1,5 @@
 # CVD Predictor - A Predictive Classification Model for Determining Risk of Heart Disease
 
-Live link here - PLACEHOLDER
-
 [CVD Predictor](https://cvd-predictor-a8ce111af1d1.herokuapp.com/) is a machine-learning (ML) project using a publically available dataset to determine whether a ML pipeline could be built in order to predict whether a patient is at risk of heart disease. This was achieved by using a classification task, using the HeartDisease attribute from the dataset as the target and the remaining attributes as features.
 
 ## Table of Contents
@@ -160,6 +158,12 @@ Live link here - PLACEHOLDER
 
 
 ## Technologies Used
+
+**WARNING:** The packages listed in the requirements.txt file are limited to those necessary for the deployment of the dashboard to Heroku, due to the limit on the slug size.
+
+* Please see the full-requirements.txt file for a comprehensive list of packages required for running the Jupyter notebooks.
+
+---
 
 The technologies used throughout the development are listed below:
 
