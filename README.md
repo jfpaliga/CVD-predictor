@@ -41,6 +41,7 @@
 | ST_Slope       | the slope of the peak exercise ST segment | Up: upsloping, Flat: flat, Down: downsloping                                                |
 | HeartDisease   | output class                              | 1: heart disease, 0: Normal                                                                 |
 
+[Back to top](#table-of-contents)
 
 ## Business Requirements
 * Cardiovascular diseases are the number 1 cause of death globally, accounting for 31% of all deaths worldwide. People with cardiovascular disease or who are at high risk of disease need early detection and management. A fictional organisation has requested a data practitioner to analyse a dataset of patients from a number of different hospitals in order to determine what factors can be attributed to a high risk of disease and whether patient data can accurately predict risk of heart disease.
@@ -48,6 +49,7 @@
 * Business Requirement 1 - The client is interested in which attributes correlate most closely with heart disease, ie what are the most common risk factors?
 * Business Requirement 2 - The client is interested in using patient data to predict whether or not a patient is at risk of heart disease.
 
+[Back to top](#table-of-contents)
 
 ## Hypothesis and how to validate?
 * Hypothesis 1:
@@ -62,6 +64,7 @@
     - We suspect that men over 50 with high cholesterol are the most at-risk patient group.
     - **Validation**: analysis and visualisation using a parallel plot of the dataset to determine a 'typical' heart disease patient profile
 
+[Back to top](#table-of-contents)
 
 ## The rationale to map the business requirements to the Data Visualizations and ML tasks
 * **Business Requirement 1**: Data Visualisation and Correlation study
@@ -69,13 +72,16 @@
     - A Pearson's correlation will indicate linear relationships between numerical variables.
     - A Spearman's correlation will measure the monotonic relationships between variables.
     - A Predictive Power Score study can also be used to determine relationships between attributes regardless of data type (6/11 features are categorical).
+    - This will be carried out during the **Data Visualization, Cleaning, and Preparation** Epic (see Epics & User Stories).
 
 * **Business Requirement 2**: Classification Model
     - We need to predict whether a patient is at risk of heart disease or not.
     - Therefore we need to build a binary classification model.
     - A conventional machine learning pipeline will be able to map the relationships between the features and target.
     - Extensive hyperparameter optimisation will give us the best chance at a highly accurate prediction.
+    - This will be carried out during the **Model Training, Optimization and Validation** Epic (see Epics & User Stories).
 
+[Back to top](#table-of-contents)
 
 ## ML Business Case
 **Classification Model**
@@ -91,6 +97,8 @@
     - The dataset contains: 918 observations and 12 attributes.
     - Target: HeartDisease; Features: all other attributes.
 
+[Back to top](#table-of-contents)
+
 ## Epics and User Stories
 * The project was split into 5 Epics based upon the Data Visualisation and Machine Learning tasks and within each of these, user stories were set out to enable an agile methodology.
 
@@ -99,7 +107,7 @@
 * **User Story** - As a data analyst, I can load a saved dataset so that I can analyse the data to gain insights on what further tasks may be required.
 
 ### Epic - Data Visualization, Cleaning, and Preparation
-* **User Story** - As a data scientist, I can visualise the dataset so that I can interpret which attributes correlate most closely with heart disease (Business Requirement 1).
+* **User Story** - As a data scientist, I can visualise the dataset so that I can interpret which attributes correlate most closely with heart disease (**Business Requirement 1**).
 * **User Story** - As a data analyst, I can evaluate the dataset to determine what data cleaning tasks need to be carried out.
 * **User Story** - As a data analyst, I can impute or drop missing data to prepare the dataset for a ML model.
 * **User Story** - As a data analyst, I can determine whether the target requires balancing in order to ensure the ML is not fed imbalanced data.
@@ -108,10 +116,10 @@
 ### Epic - Model Training, Optimization and Validation
 * **User Story** - As a data scientist, I can split the data into a train and test set to prepare it for the ML model.
 * **User Story** - As a data engineer, I can fit a ML pipeline with all the data to prepare the ML model for deployment.
-* **User Story** - As a data engineer, I can determine the best algorithm for predicting heart disease to use in the ML model.
-* **User Story** - As a data engineer, I can carry out an extensive hyperparameter optimisation to ensure the ML model gives the best results.
-* **User Story** - As a data scientist, I can determine the best features from the ML pipeline to determine whether the ML model can be optimised further.
-* **User Story** - As a data scientist, I can evaluate the ML model's performance to determine whether it can successfully predict heart disease (Business Requirement 2).
+* **User Story** - As a data engineer, I can determine the best algorithm for predicting heart disease to use in the ML model (**Business Requirement 2**).
+* **User Story** - As a data engineer, I can carry out an extensive hyperparameter optimisation to ensure the ML model gives the best results (**Business Requirement 2**).
+* **User Story** - As a data scientist, I can determine the best features from the ML pipeline to determine whether the ML model can be optimised further (**Business Requirement 2**).
+* **User Story** - As a data scientist, I can evaluate the ML model's performance to determine whether it can successfully predict heart disease (**Business Requirement 2**).
 
 ### Epic - Dashboard Planning, Designing, and Development
 * **User Story** - As a non-technical user, I can view a project summary that describes the project, dataset and business requirements to understand the project at a glance.
@@ -125,6 +133,7 @@
 * **User Story** - As a user, I can view the project dashboard on a live deployed website.
 * **User Story** - As a technical user, I can follow instructions in the readme to fork the repository and deploy the project for myself.
 
+[Back to top](#table-of-contents)
 
 ## Dashboard Design
 ### Page 1: Project Summary
@@ -156,6 +165,7 @@
 * Model pipeline, features used to train the model and how they were selected
 * Documentation of model performance on train and test sets
 
+[Back to top](#table-of-contents)
 
 ## Technologies Used
 
@@ -167,61 +177,33 @@ The technologies used throughout the development are listed below:
 
 ### Python Packages
 
-* [Pandas](https://pandas.pydata.org/docs/index.html)
+* [Pandas](https://pandas.pydata.org/docs/index.html) - Open source library for data manipulation and analysis.
+* [Numpy](https://numpy.org/doc/stable/index.html) - Adds support for large, multi-dimensional arrays and matrices, and high-level mathematical functions.
+* [YData Profiling](https://docs.profiling.ydata.ai/latest/) - For data profiling and exploratory data analysis.
+* [Matplotlib](https://matplotlib.org/) - Comprehensive library for creating static, animated and interactive visualisations.
+* [Seaborn](https://seaborn.pydata.org/) - Another data visualisation library for drawing attractive and informative statistical graphics.
+* [Pingouin](https://pingouin-stats.org/build/html/index.html) - Open source statistical package for simple yet exhaustive stats functions.
+* [Feature-engine](https://feature-engine.trainindata.com/en/latest/) - Library with multiple transformers to engineer and select features for machine learning models.
+* [ppscore](https://pypi.org/project/ppscore/) - Library for detecting linear or non-linear relationships between two features.
+* [scikit-learn](https://scikit-learn.org/stable/) - Open source machine learning library that features various algorithms for training a ML model.
+* [SciPy](https://scipy.org/) - Library used for scientific computing and technical computing.
+* [XGBoost](https://xgboost.readthedocs.io/en/stable/) - Optimised distributed gradient boosting library.
+* [Imbalanced-learn](https://imbalanced-learn.org/stable/) - Provides tools for dealing with classification problems with imbalanced classes.
+* [Joblib](https://joblib.readthedocs.io/en/stable/) - Provides tools for lightweight pipelining, e.g. caching output values.
 
-    Open source library for data manipulation and analysis.
+### Other Technologies
 
-* [Numpy](https://numpy.org/doc/stable/index.html)
+* [Git](https://git-scm.com/) - For version control
+* [GitHub](https://github.com/) - Code repository and GitHub projects was used as a Kanban board for Agile development
+* [Heroku](https://heroku.com) - For application deployment
+* [VSCode](https://code.visualstudio.com/) - IDE used for development
 
-    Adds support for large, multi-dimensional arrays and matrices, and high-level mathematical functions.
-
-* [YData Profiling](https://docs.profiling.ydata.ai/latest/)
-
-    For data profiling and exploratory data analysis.
-
-* [Matplotlib](https://matplotlib.org/)
-
-    Comprehensive library for creating static, animated and interactive visualisations.
-
-* [Seaborn](https://seaborn.pydata.org/)
-
-    Another data visualisation library for drawing attractive and informative statistical graphics.
-
-* [Pingouin](https://pingouin-stats.org/build/html/index.html)
-
-    Open source statistical package for simple yet exhaustive stats functions.
-
-* [Feature-engine](https://feature-engine.trainindata.com/en/latest/)
-
-    Library with multiple transformers to engineer and select features for machine learning models.
-
-* [ppscore](https://pypi.org/project/ppscore/)
-
-    Library for detecting linear or non-linear relationships between two features.
-
-* [scikit-learn](https://scikit-learn.org/stable/)
-
-    Open source machine learning library that features various algorithms for training a ML model.
-
-* [SciPy](https://scipy.org/)
-
-    Library used for scientific computing and technical computing.
-
-* [XGBoost](https://xgboost.readthedocs.io/en/stable/)
-
-    Optimised distributed gradient boosting library.
-
-* [Imbalanced-learn](https://imbalanced-learn.org/stable/)
-
-    Provides tools for dealing with classification problems with imbalanced classes.
-
-* [Joblib](https://joblib.readthedocs.io/en/stable/)
-
-    Provides tools for lightweight pipelining, e.g. caching output values.
+[Back to top](#table-of-contents)
 
 ## Testing
 * testing
 
+[Back to top](#table-of-contents)
 
 ## Issues
 ### Heroku Slug Size and XGBoost
@@ -242,6 +224,12 @@ The technologies used throughout the development are listed below:
 * I carried out hyperparameter optimisation again, resulting in v2 of the model, however the performance was still not as good as achieved in v1.
 * I had to accept this trade-off in performance, due to the limitations of Heroku deployment.
 
+[Back to top](#table-of-contents)
+
+## Unfixed Bugs
+* At the time of writing, there are no unfixed bugs within the project.
+
+[Back to top](#table-of-contents)
 
 ## Deployment
 ### Heroku
@@ -256,6 +244,8 @@ The technologies used throughout the development are listed below:
 4. Select the branch you want to deploy, then click Deploy Branch.
 5. The deployment process should happen smoothly if all deployment files are fully functional. Click now the button Open App on the top of the page to access your App.
 6. If the slug size is too large then add large files not required for the app to the .slugignore file.
+
+[Back to top](#table-of-contents)
 
 ## Forking and Cloning
 If you wish to fork or clone this repository, please follow the instructions below:
@@ -280,6 +270,7 @@ In order to ensure all the correct dependencies are installed in your local envi
 
     pip install -r full-requirements.txt
 
+[Back to top](#table-of-contents)
 
 ## Credits 
 
@@ -302,7 +293,9 @@ In order to ensure all the correct dependencies are installed in your local envi
 #### Streamlit Dashboard
 * The multi-page class was taken from the Code Institute "Data Analysis & Machine Learning Toolkit" streamlit lessons.
 
+[Back to top](#table-of-contents)
 
 ## Acknowledgements
 * Thank the people that provided support through this project.
 
+[Back to top](#table-of-contents)
