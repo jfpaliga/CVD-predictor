@@ -230,12 +230,23 @@ The technologies used throughout the development are listed below:
 
 
 ## Issues
+### Heroku Slug Size and XGBoost
+* Development of the classification model initially took place using XGBoost version 2.0.3 (see outputs/ml_pipeline/classification_model/v1).
+* The model gave excellent results with 93% recall for heart disease on both train and test sets, and precision on no heart disease of 90% for the train set and 85% for the test set.
+* Unfortunately, upon deployment of the dashboard on Heroku using this model failed as the slug size was too large.
 
-* Describe v1 development and issues with deployment to Heroku
+![Image showing failed Heroku deployment due to too large a slug size](assets/images/slug_size_too_large.png)
 
+* A number of attempts were made to reduce the slug size, including adding all unnecessary files for deployment to the ```.slugignore``` file, removing requirements from ```requirements.txt``` so that only packages necessary for deployment were present and purging the build cache using the Heroku CLI.
+* These attempts were unsuccessful, and the slug size remained too large.
+* During further analysis of the build log, I noticed that the size of XGBoost was very large:
 
-## Unfixed Bugs
-* You will need to mention unfixed bugs and why they were not fixed. This section should include shortcomings of the frameworks or technologies used. Although time can be a significant variable to consider, paucity of time and difficulty understanding implementation is not a valid reason to leave bugs unfixed.
+![Image showing size of the xgboost package downloaded for deployment](assets/images/xgboost_download.png)
+
+* Therefore, I attempted to roll back to an older version of XGBoost (version 1.7.6) in order to reduce it's size.
+* This was successful, and the app was now able to be deployed to Heroku, however my model no longer gave the same performance.
+* I carried out hyperparameter optimisation again, resulting in v2 of the model, however the performance was still not as good as achieved in v1.
+* I had to accept this trade-off in performance, due to the limitations of Heroku deployment.
 
 
 ## Deployment
@@ -257,19 +268,22 @@ The technologies used throughout the development are listed below:
 
 ### Content 
 
-- The text for the Home page was taken from Wikipedia Article A
-- Instructions on how to implement form validation on the Sign-Up page was taken from [Specific YouTube Tutorial](https://www.youtube.com/)
-- The icons in the footer were taken from [Font Awesome](https://fontawesome.com/)
+#### Exploratory Data Analysis Notebook
+* The code for the histogram/QQ plots and PPS score heatmaps were taken from the Code Institute "Churnometer" walkthrough project.
 
-- The code for the histogram/QQ plots and PPS score heatmaps were taken from the Code Institute "Churnometer" walkthrough project.
-- Other bits of code used from Code Institute, check all notebooks.
-- The parameters to optimise and related values were taken from Abhishek Thakur's ["Approaching (Almost) Any Machine Learning Problem"](https://www.linkedin.com/pulse/approaching-almost-any-machine-learning-problem-abhishek-thakur/) post on LinkedIn and Jason Brownlee's [Machine Learning Mastery](https://machinelearningmastery.com/hyperparameters-for-classification-machine-learning-algorithms/) website.
+#### Data Cleaning Notebook
+* The custom function for checking the effect of data cleaning on distribution was taken from the Code Institute "Data Analytics Packages - ML: feature-engine" module.
 
-### Media
+#### Feature Engineering Workbook
+* The custom function for analysing transformations during feature engineering was taken from the Code Institute "Data Analytics Packages - ML: feature-engine" module.
 
-- The photos used on the home and sign-up page are from This Open-Source site
-- The images used for the gallery page were taken from this other open-source site
+#### Modelling And Evaluation Notebook
+* Abhishek Thakur's ["Approaching (Almost) Any Machine Learning Problem"](https://www.linkedin.com/pulse/approaching-almost-any-machine-learning-problem-abhishek-thakur/) post on LinkedIn and Jason Brownlee's [Machine Learning Mastery](https://machinelearningmastery.com/hyperparameters-for-classification-machine-learning-algorithms/) website were both used to help define the hyperparameter values used for optimisation.
+* The custom function for carrying out hyperparameter optimisation was taken from the Code Institute "Data Analytics Packages - ML: Scikit-learn" module.
+* The custom function for displaying the confusion matrix and analysing model performance was taken from the Code Institute "Data Analytics Packages - ML: Scikit-learn" module.
 
+#### Streamlit Dashboard
+* The multi-page class was taken from the Code Institute "Data Analysis & Machine Learning Toolkit" streamlit lessons.
 
 
 ## Acknowledgements

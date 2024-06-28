@@ -1,8 +1,10 @@
 *.ipynb
 .vscode
+assets/*
 inputs/*
 jupyter_notebooks/*
 outputs/datasets/cleaned/*
 .gitpod.dockerfile
 .gitpod.yml
+full-requirements.txt
 README.md
