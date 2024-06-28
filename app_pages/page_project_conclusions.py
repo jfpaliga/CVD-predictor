@@ -21,7 +21,7 @@ def page_project_conclusions_body():
 
     st.info(
         f"#### Project Outcomes\n\n"
-        f"The model performed well, although there is a discrepancy in the precision between the train and test sets which may be the result of some overfitting."
-        f"Hyperparameter optimisation proved more challenging than I expected, so I feel there is much more to be learned in this area."
+        f"The model performed well, although there is a discrepancy in the precision between the train and test sets which may be the result of some overfitting.\n"
+        f"Hyperparameter optimisation proved more challenging than I expected, so I feel there is much more to be learned in this area.\n"
         f"Training the model on multiple datasets would be a good next step to see how different datasets behave, and to better understand how the data could be transformed."
     )
