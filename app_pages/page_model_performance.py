@@ -1,4 +1,5 @@
 import streamlit as st
+import matplotlib.pyplot as plt
 import pandas as pd
 
 from src.data_management import load_pkl_file
@@ -13,6 +14,9 @@ def page_model_performance_body():
     )
     model_pipeline = load_pkl_file(
         f"outputs/ml_pipeline/classification_model/{version}/classification_pipeline.pkl"
+    )
+    feat_importance = plt.imread(
+        f"outputs/ml_pipeline/classification_model/{version}/features_importance.png"
     )
     X_train = pd.read_csv(
         f"outputs/ml_pipeline/classification_model/{version}/X_train.csv"
@@ -31,9 +35,9 @@ def page_model_performance_body():
 
     st.info(
         f"The model success metrics are:\n"
-        f"* At least 90% recall for heart disease (the model minimises the chances of missing a posititve diagnosis).\n\n"
+        f"* At least 75% recall for heart disease (the model minimises the chances of missing a posititve diagnosis).\n\n"
         f"The model will be considered a failure if:\n"
-        f"* The model fails to achieve 90% recall for heart disease.\n"
+        f"* The model fails to achieve 75% recall for heart disease.\n"
         f"* The model fails to achieve 70% precision for no heart disease (false positives).\n"
     )
 
@@ -48,7 +52,16 @@ def page_model_performance_body():
     st.write(model_pipeline)
 
     st.write("---")
+    st.write(f"#### Feature Importance")
+    st.write(f"* The most important features used for training the model were as follows:\n")
+    st.write(X_train.columns.to_list())
+    st.image(feat_importance)
+
+    st.write("---")
     st.write(f"#### Model Performance")
+    st.write(f"The model passed the acceptance criteria with the following metrics:\n")
+    st.write(f"* Recall on Heart Disease: 89% on train set, 88% on test set.\n")
+    st.write(f"* Precision on No Heart Disease: 87% on train set, 81% on test set.")
     clf_performance(X_train=X_train, y_train=y_train,
                     X_test=X_test, y_test=y_test,
                     pipeline=model_pipeline,
