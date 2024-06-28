@@ -59,9 +59,14 @@ def page_model_performance_body():
 
     st.write("---")
     st.write(f"#### Model Performance")
-    st.success(f"The model passed the acceptance criteria with the following metrics:\n")
-    st.success(f"* Recall on Heart Disease: 89% on train set, 88% on test set.\n")
-    st.success(f"* Precision on No Heart Disease: 87% on train set, 81% on test set.")
+    st.success(
+        f"The model passed the acceptance criteria with the following metrics:\n"
+        f"* Recall on Heart Disease: 89% on train set, 88% on test set.\n"
+        f"* Precision on No Heart Disease: 87% on train set, 81% on test set."
+        )
+
+    st.write("---")
+
     clf_performance(X_train=X_train, y_train=y_train,
                     X_test=X_test, y_test=y_test,
                     pipeline=model_pipeline,
